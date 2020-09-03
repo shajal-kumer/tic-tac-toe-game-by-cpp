@@ -22,7 +22,7 @@ void draw() {
 }
 
 void input() {
- int a;
+ int a; // Input Variable
  cout << "It's " << player << " turn. " << "Enter the number of the field: ";
  cin >> a;
  if (a == 1) {
@@ -92,10 +92,15 @@ void input() {
 }
 
 void togglePlayer() {
-    if(player == 'X')
+
+    switch (player)
+    {
+    case 'X':
         player = '0';
-    else
+        break;
+    default:
         player = 'X';
+    }
 }
 
 char win() {
@@ -160,24 +165,25 @@ while(1) {
     n++;
     input();
     draw();
-    if(win() == 'X'){
-        cout<<"\nX win!"<<endl;
+    switch (win()) // Did slight optimization by replace if statements with switch
+    {
+    default:
         break;
-    }else if(win() == 'O') {
-        cout<<"\nO win!"<<endl;
+    case 'X':
+        cout << "\nX win!" << endl;
         break;
-    } else if(win() == '/' && n == 9) {
-        cout<<"Game draw!"<<endl;
+    case 'O':
+        cout << "\nO win!" << endl;
+        break;
+    case '/':
+        if (n == 9)
+        {
+            cout << "Game draw!" << endl;
+        }
         break;
     }
     togglePlayer();
 
 }
-
-
-
-
-
-
 return 0;
 }
